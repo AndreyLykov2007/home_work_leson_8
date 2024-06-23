@@ -2,8 +2,10 @@ package test;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+
+import static com.codeborne.selenide.Selenide.open;
 
 public class TestBase {
 
@@ -12,11 +14,12 @@ public class TestBase {
         Configuration.browserSize = "1920x1080";
         Configuration.pageLoadStrategy = "eager";
         Configuration.baseUrl = "https://dropmefiles.com";
-        Configuration.holdBrowserOpen = true;
+        open("/");
+
     }
 
-        @AfterEach
-        void afterEach() {
-            Selenide.closeWebDriver();
-        }
+    @AfterAll
+    static void afterAll() {
+        Selenide.closeWebDriver();
     }
+}
