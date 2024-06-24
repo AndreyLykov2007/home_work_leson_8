@@ -27,7 +27,7 @@ public class DropMeFileComTest extends TestBase {
         MainPage.verifyLanguageElement(languageName);
     }
 
-    @DisplayName("Сооветствие центрального заголовку выбранному языку")
+    @DisplayName("Соответствие центрального заголовку выбранному языку")
     @ParameterizedTest(name = "При выборе языка - {0}, центральный заголовок - {1} {2}")
     @CsvFileSource(resources = "/test_data/centralHeadingShouldHasTextDependingOnLanguageSelected.csv",
             numLinesToSkip = 1)
@@ -52,7 +52,7 @@ public class DropMeFileComTest extends TestBase {
     @ParameterizedTest(name = "При выборе языка - {0}, отображаются переключатели - {1}")
     @MethodSource()
     void dropMeFileComOptionButtonsTest(String languageName, List<String> expectedButtons) {
-        MainPage.setLanguage(languageName);
-        $$("div.input_line label[for^=period]").filter(visible).shouldHave(texts(expectedButtons));
+        MainPage.setLanguage(languageName)
+        .verifyOptionButtons(expectedButtons);
     }
 }
